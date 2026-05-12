@@ -22,7 +22,9 @@ function actualizarRenderRuleta() {
 }
 
 function iniciarGiroRuleta() {
-    ruelta.start();
+    ruelta.start((winner) => {
+        visorRespuesta.textContent = winner;
+    });
 }
 
 function ocultarElementoSeleccionado() {

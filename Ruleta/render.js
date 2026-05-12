@@ -108,7 +108,7 @@ class Roulette {
             //ease out effect
             const easeOut = 1 - Math.pow(1 - progress, 3);
 
-            this.rotation =  startRotation + (targetLocation - startRotation) * easeOut;
+            this.rotation =  startLocation + (targetLocation - startLocation) * easeOut;
 
             this.draw();
 
