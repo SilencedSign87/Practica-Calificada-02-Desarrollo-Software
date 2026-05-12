@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorteo de equipos</title>
+  <link rel="stylesheet" href="estilos/styles.css">
+</head>
+<body>
+  <main class="app">
+    <section id="setupScreen" class="screen screen--active" aria-labelledby="setupTitle">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Sorteo aleatorio</p>
+          <h1 id="setupTitle">Generador de equipos</h1>
+        </div>
+        <span class="badge">Max. 100 participantes</span>
+      </header>
+
+      <div class="setup-grid">
+        <section class="panel participants-panel">
+          <label class="section-title" for="participants">1. Ingresa los participantes</label>
+          <div class="textarea-wrap">
+            <textarea id="participants" maxlength="5200" placeholder="Cada participante debe estar en una nueva linea"></textarea>
+            <span id="participantCount" class="counter">0</span>
+          </div>
+          <p class="hint">Agrega un * para indicar lideres de grupo. *Lider</p>
+          <p id="participantsError" class="error" aria-live="polite"></p>
+        </section>
+
+        <section class="panel options-panel">
+          <div class="field-group">
+            <p class="section-title">2. Como dividir:</p>
+            <div class="radio-row" role="radiogroup" aria-label="Modo de division">
+              <label class="radio-option">
+                <input type="radio" name="splitMode" value="teams" checked>
+                <span>Cantidad de equipos</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="splitMode" value="members">
+                <span>Participantes por equipo</span>
+              </label>
+            </div>
+            <select id="splitValue" aria-label="Valor de division"></select>
+          </div>
+
+          <div class="field-group">
+            <label class="section-title" for="teamTitle">3. Titulo</label>
+            <input id="teamTitle" type="text" maxlength="50" placeholder="Copa del Mundo Qatar 2022">
+          </div>
+
+          <div class="actions">
+            <button id="clearBtn" class="btn btn--ghost" type="button">Limpiar</button>
+            <button id="generateBtn" class="btn btn--primary" type="button">Generar equipos</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="resultScreen" class="screen" aria-labelledby="resultTitle">
+      <header class="result-header">
+        <button id="backBtn" class="icon-btn" type="button" aria-label="Volver">‹</button>
+        <div>
+          <p class="eyebrow">Resultados</p>
+          <h2 id="resultTitle">Equipos generados</h2>
+        </div>
+      </header>
+
+      <section id="captureArea" class="capture-area">
+        <h3 id="finalTitle" class="final-title">Equipos</h3>
+        <div id="teamsGrid" class="teams-grid" aria-live="polite"></div>
+      </section>
+
+      <div class="result-actions">
+        <button id="downloadBtn" class="btn btn--secondary" type="button">Descargar JPG</button>
+        <button id="copyImageBtn" class="btn btn--secondary" type="button">Copiar imagen</button>
+        <button id="copyColumnsBtn" class="btn btn--primary" type="button">Copiar columnas</button>
+      </div>
+      <p id="actionMessage" class="toast" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="scripts/app.js"></script>
+</body>
+</html>
