@@ -97,6 +97,7 @@ class Roulette {
         const randomAngle = Math.random() * TWO_PI; // Random angle to land on
 
         const targetLocation = this.rotation + extraSpins * TWO_PI + randomAngle;
+        const startLocation = this.rotation;
 
         const start = performance.now();
 
@@ -107,7 +108,7 @@ class Roulette {
             //ease out effect
             const easeOut = 1 - Math.pow(1 - progress, 3);
 
-            this.rotation = this.rotation + (targetLocation - this.rotation) * easeOut;
+            this.rotation =  startRotation + (targetLocation - startRotation) * easeOut;
 
             this.draw();
 
