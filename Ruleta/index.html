@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruleta de sorteos</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="render.js"></script>
+</head>
+
+<body>
+    <h1>Ruleta de sorteos</h1>
+    <main>
+        <!-- Render de ruleta -->
+        <div class="canva_contenedor">
+
+            <canvas id="ruleta">
+
+            </canvas>
+        </div>
+        <!-- Controles -->
+        <aside>
+            <header class="cabecera-principal">
+                <div class="contenedor-respuesta">
+                    <span>RESPUESTA</span>
+                    <h2 id="texto-seleccionado">---</h2>
+                </div>
+                <div class="botones-principales">
+                    <button id="btn-iniciar" class="azul">Iniciar</button> <button id="btn-reiniciar-top"
+                        class="rosado">Reiniciar</button>
+                </div>
+            </header>
+
+            <main class="contenedor-juego">
+                <div id="ruleta-render"></div>
+
+                <aside class="panel-derecho">
+                    <div class="editor-contenedor">
+                        <textarea id="entrada-lista" spellcheck="false"></textarea>
+
+                        <div class="botones-secundarios">
+                            <button>Título</button>
+                            <button id="btn-editar">Editar</button> <button>esconder...</button>
+                        </div>
+                    </div>
+
+                    <div class="leyenda-controles">
+                        <p><span>SPACE</span> Gíralo</p>
+                        <p><span>S</span> Ocultar el elemento seleccionado</p>
+                        <p><span>R</span> Reiniciar</p>
+                        <p><span>E</span> Editar</p>
+                        <p><span>F</span> Pantalla completa</p>
+                    </div>
+                </aside>
+            </main>
+        </aside>
+    </main>
+    <script src="main.js"></script>
+</body>
+
+</html>
