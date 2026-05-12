@@ -28,7 +28,15 @@ function iniciarGiroRuleta() {
 }
 
 function ocultarElementoSeleccionado() {
-    // Por implementar
+    const elementoSeleccionado = visorRespuesta.textContent;
+    if (elementoSeleccionado && elementoSeleccionado !== '---') {
+        const lineas = areaTextoElementos.value.split('\n');
+        const nuevasLineas = lineas.filter(linea => linea.trim() !== elementoSeleccionado);
+        areaTextoElementos.value = nuevasLineas.join('\n');
+        guardarDatos();
+        actualizarRenderRuleta();
+        visorRespuesta.textContent = '---';
+    }
 }
 
 function reiniciarSorteo() {
