@@ -18,11 +18,44 @@ class Roulette {
         this.rotation = 0;
         this.isSpinning = false;
 
-        this.centerX = this.canvas.width / 2;
-        this.centerY = this.canvas.height / 2;
-        this.radius = Math.min(this.centerX, this.centerY) - ROULETTE_CONTAINER_PADDING;
+        this.handleResize = this.handleResize.bind(this);
+        this.canvasWrapper = this.canvas.parentElement;
+        this.resizeCanvas();
+        if (typeof ResizeObserver !== 'undefined') {
+            this.resizeObserver = new ResizeObserver(() => this.handleResize());
+            this.resizeObserver.observe(this.canvas);
+            if (this.canvasWrapper) {
+                this.resizeObserver.observe(this.canvasWrapper);
+            }
+        } else {
+            window.addEventListener('resize', this.handleResize);
+        }
 
         this.draw(); // Initial draw
+    }
+
+    handleResize() {
+        this.resizeCanvas();
+        this.draw();
+    }
+
+    resizeCanvas() {
+        const size = Math.min(
+            this.canvas.clientWidth || this.canvasWrapper?.clientWidth || this.canvas.width,
+            this.canvas.clientHeight || this.canvasWrapper?.clientHeight || this.canvas.height
+        );
+
+        const logicalSize = size > 0 ? size : 300;
+        const devicePixelRatio = window.devicePixelRatio || 1;
+
+        this.canvas.width = Math.round(logicalSize * devicePixelRatio);
+        this.canvas.height = Math.round(logicalSize * devicePixelRatio);
+
+        this.ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+
+        this.centerX = logicalSize / 2;
+        this.centerY = logicalSize / 2;
+        this.radius = Math.min(this.centerX, this.centerY) - ROULETTE_CONTAINER_PADDING;
     }
 
     RenderOptions(options = []) {
@@ -32,8 +65,10 @@ class Roulette {
 
     draw() {
         const ctx = this.ctx;
+        const width = this.canvas.clientWidth || this.canvasWrapper?.clientWidth || this.canvas.width;
+        const height = this.canvas.clientHeight || this.canvasWrapper?.clientHeight || this.canvas.height;
 
-        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        ctx.clearRect(0, 0, width, height);
 
         if (!this.options.length) return;
 
@@ -78,9 +113,9 @@ class Roulette {
 
         ctx.beginPath();
 
-        ctx.moveTo(this.centerX + this.radius + 10, this.centerY);
-        ctx.lineTo(this.centerX + this.radius - 20, this.centerY - 15);
-        ctx.lineTo(this.centerX + this.radius - 20, this.centerY + 15);
+        ctx.moveTo(this.centerX + this.radius - 20 , this.centerY);
+        ctx.lineTo(this.centerX + this.radius + 10, this.centerY - 15);
+        ctx.lineTo(this.centerX + this.radius + 10, this.centerY + 15);
 
         ctx.closePath();
 
